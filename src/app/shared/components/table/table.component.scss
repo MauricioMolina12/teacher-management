@@ -1,0 +1,144 @@
+.table-container {
+  width: 80%;
+  text-align: center;
+
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+
+    .table-title {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .inputs-wrapper {
+      width: 50%;
+      display: flex;
+      // gap: 10px;
+
+      input {
+        height: 100%;
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--color-medium);
+        border-radius: 5px;
+      }
+
+      .filter-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        // background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 15%;
+        padding-inline: 10px;
+        border-radius: 10px;
+
+        i {
+          color: var(--color-gray);
+        }
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid var(--color-white);
+      font-size: .8rem;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--color-white);
+      background: var(--color-primary);
+    }
+
+    td{
+      font-weight: 300;
+      color: var(--color-gray);
+    }
+
+    tbody tr:hover {
+      background: #ffe2e03c;
+    }
+  }
+
+  .pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 10px;
+
+    button {
+      padding: 10px;
+      margin: 0 5px;
+      border: none;
+      background: var(--color-primary);
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+    }
+
+    span{
+      color: var(--color-primary);
+      font-size: .8rem;
+    }
+  }
+}
+
+$skeleton-bg: #e0e0e0;
+$skeleton-highlight: #f0f0f0;
+
+@keyframes loading {
+  0% {
+    background-color: $skeleton-bg;
+  }
+  50% {
+    background-color: $skeleton-highlight;
+  }
+  100% {
+    background-color: $skeleton-bg;
+  }
+}
+
+.skeleton-container {
+  width: 300px;
+  height: 50vh;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-row {
+  display: flex;
+  gap: 10px;
+}
+
+.skeleton {
+  height: 20px;
+  border-radius: 4px;
+  animation: loading 1.5s infinite ease-in-out;
+}
+
+.skeleton-text {
+  flex: 1;
+}

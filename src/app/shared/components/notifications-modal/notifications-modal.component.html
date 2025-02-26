@@ -1,0 +1,19 @@
+<div class="modal-overlay" *ngIf="isActive" (click)="closeModal()"></div>
+
+<div class="modal" [class.active]="isActive">
+  <div class="modal-header">
+    <h2>Notificaciones</h2>
+    <button class="close-btn" (click)="closeModal()">×</button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="notifications.length === 0" class="no-notifications">
+      No hay notificaciones
+    </div>
+    <div *ngFor="let notification of notifications" class="notification-item">
+      <strong>{{ notification.title }}</strong>
+      <p>{{ notification.message }}</p>
+      <span class="time">{{ notification.time }}</span>
+    </div>
+  </div>
+</div>

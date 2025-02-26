@@ -1,0 +1,66 @@
+@use "../../src/app/shared/styles/variables.scss";
+
+.layout-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: var(--color-primary-contrast);
+
+
+  .layout-container {
+    height: 100%;
+    margin: 0;
+    .layout-content {
+      height: auto;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+
+      .main {
+        width: 99%;
+        height: 100%;
+        box-sizing: border-box;
+
+        .main__header {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 10vh;
+
+          .header__title{
+            color: var(--color-primary);
+          }
+        }
+
+        .main__products {
+          width: 100%;
+          height: 60%;
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+        }
+      }
+    }
+  }
+}
+
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+/* Small laptops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  
+}
+
+/* Medium screens */
+@media (min-width: 1280px) {
+  
+}
+
+/* Big screens */
+@media (min-width: 1920px) {
+}

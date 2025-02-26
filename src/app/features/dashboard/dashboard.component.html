@@ -1,0 +1,35 @@
+<div class="wrapper-layout">
+    <aside class="side-bar">
+        <img class="side-bar__image" src="assets/logo-2-black.png" alt="logo-UL">
+        <ul class="side-bar__list">
+            <li class="side-bar__list-item" *ngFor="let item of items.slice(0,5)" [routerLink]="item.url"
+                [routerLinkActive]="'active'">
+                <i class="icon material-icons">{{item.icon}}</i>
+                <span>{{item.title}}</span>
+            </li>
+        </ul>
+        <ul class="side-bar__list bottom-list">
+            <li class="side-bar__list-item" 
+                (click)="handleClick(item.title)" 
+                *ngFor="let item of items.slice(5,9)"
+                [routerLink]="item.url" 
+                [routerLinkActive]="'active'"
+                [ngClass]="{
+                'pending' : item.title == 'Notifications', 
+                'active': item.title == 'Notifications'
+                }">
+                
+                <i class="icon material-icons">{{item.icon}}</i>
+                <span>{{item.title}}</span>
+            </li>
+            <div class="hour">
+
+            </div>
+        </ul>
+    </aside>
+    <div class="layout-components">
+        <app-notifications-modal *ngIf="!isClose"></app-notifications-modal>
+        <app-fade-out *ngIf="!isLogOut"></app-fade-out>
+        <router-outlet></router-outlet>
+    </div>
+</div>

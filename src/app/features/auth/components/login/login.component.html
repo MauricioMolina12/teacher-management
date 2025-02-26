@@ -1,0 +1,51 @@
+<div class="login-wrapper">
+
+    <!--Form-->
+    <form class="login-form" [formGroup]="myForm" (ngSubmit)="enviarFormulario()">
+        <img class="login-image" src="/assets/logo.png" alt="">
+        <h1 class="login-title">MULT</h1>
+        <span class="login-description">Enter your credentials to access your account</span>
+
+
+        <!--User controller-->
+        <div class="user">
+            <label for="user">Usuario</label>
+            <input type="email" formControlName="email" id="user" class="email-input"
+                placeholder="Ej: mauriciom-molinap@unilibre.edu.co">
+            <fa-icon class="icon" [icon]="faEmail"></fa-icon>
+        </div>
+        <div *ngIf="myForm.get('email')?.invalid" class="errors">
+            <!-- <small *ngIf="myForm.get('email')?.hasError('required') && myForm.get('email')?.touched">
+                <fa-icon [icon]="faWarning"></fa-icon>
+                El email es obligatorio.
+            </small> -->
+            <small *ngIf="myForm.get('email')?.hasError('validateEmail')">
+                <fa-icon [icon]="faWarning"></fa-icon>
+                El formato del email es incorrecto.
+            </small>
+        </div>
+
+
+        <!--Password controller-->
+        <div class="password">
+            <label for="password">Contraseña</label>
+            <input [type]="viewPassword ? 'text' : 'password'" id="password" class="password-input">
+            <fa-icon (click)="viewPassword = !viewPassword" class="icon"
+                [icon]="viewPassword ? faEyeNoView : faEye"></fa-icon>
+
+        </div>
+
+        <!--Button submit-->
+        <div class="button-submit">
+            <button type="submit" [disabled]="myForm.invalid">Iniciar sesión</button>
+        </div>
+
+    </form>
+    <aside class="login-images">
+        <h1 class="title">The simplest way to manage your workforce</h1>
+        <span class="description">Enter your credentials to access your account</span>
+        <img class="dasboard-image" src="/assets/dashboard.png" alt="">
+        <img class="search-image" src="/assets/search-user.png" alt="">
+        <img class="logo-unilibre" src="/assets/logo-2.png" alt="">
+    </aside>
+</div>

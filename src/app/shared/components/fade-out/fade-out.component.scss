@@ -1,0 +1,111 @@
+@keyframes showTopText {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(0, 50%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes showBottomText {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dividerAnimation {
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+.animated-title {
+  color: black;
+  background-color: var(--color-primary);
+  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+
+  @media screen and (max-width: 600px) {
+    width: 90vw;
+  }
+}
+
+.animated-title {
+  & > div {
+    height: 50%;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .text-top {
+    position: relative;
+
+    & > div {
+      animation: showTopText 600ms ease-out forwards;
+      animation-delay: 0.2s;
+      font-size: clamp(2rem, 4vmin, 4vmin);
+      font-weight: 600;
+      padding: 1.5rem 0;
+      color: white;
+      position: absolute;
+      bottom: 0;
+      transform: translate(0, 100%);
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .text-divider {
+    width: 30%;
+    height: 8px;
+    background: linear-gradient(white 0 0) left/0% 100% no-repeat
+      rgb(154, 154, 154);
+    animation: dividerAnimation 2.8s infinite linear;
+    margin: 0 auto;
+  }
+
+  .text-bottom {
+    margin-top: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    figure {
+      img {
+        height: 50%;
+        max-width: 100%;
+      }
+      div {
+        animation: showBottomText 500ms ease-out forwards;
+        animation-delay: 600ms;
+        font-size: clamp(1.8rem, 3.5vmin, 4vmin);
+        font-weight: 600;
+        color: white;
+        transform: translate(0, -20%);
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.animated-title .text-top .animated-title .text-top span:first-child {
+  color: white;
+}

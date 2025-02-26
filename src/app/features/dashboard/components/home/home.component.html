@@ -1,0 +1,25 @@
+<div class="wrapper-home">
+    <div class="account-container">
+        <img src="https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/09/Poses-Perfil-Profesional-Mujeres-jul.-12-2023-768x960.jpg?lossy=1&strip=1&webp=1"
+            alt="">
+        <div class="account-name">
+            <span>Hey, admin!</span>
+            <p>olestiae, provident molestias! Praesentium quam adipisci sunt ab odit?</p>
+        </div>
+    </div>
+    <div class="banner-container">
+        <div class="item" *ngFor="let item of itemsBanner; let i = index">
+            <div class="item-icon">
+                <fa-icon class="icon" [icon]="item.icon"></fa-icon>
+            </div>
+            <div class="item-text">
+                <span>{{item.title}}</span>
+                <small>
+                    {{item.value}}
+                    <span *ngIf="i == 1">%</span>
+                </small>
+            </div>
+        </div>
+    </div>
+    <app-table [usersList]="users"></app-table>
+</div>

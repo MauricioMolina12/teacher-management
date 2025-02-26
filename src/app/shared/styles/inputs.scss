@@ -1,0 +1,12 @@
+@mixin input($bg-color, $text-color, $width) {
+    border-radius: inherit;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: $width;
+    margin: 0;
+    background-color: var(--color-border-gray);
+    color: $text-color;
+    padding-inline: 12px;
+
+}
