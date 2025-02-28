@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   faBookmark,
   faGrip,
@@ -22,7 +22,7 @@ import { UsersService } from '../../../../shared/services/users.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   // Icons
   faHome = faHomeLgAlt;
   faBook = faBookmark;
@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   faArrowUp = faCaretUp;
 
   percentaje: number = 12;
+  usersNumber: number = 0;
   users: any[] = [];
 
   constructor(public usersService: UsersService) {}
@@ -44,17 +45,22 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();    
   }
+  
+  ngAfterViewInit(): void {
+    this.usersNumber = this.users.length
+  }
 
   getAllUsers() {
-    this.usersService.getAllUsers().subscribe((users) => {
+    this.usersService.users$.subscribe((users) => {
       this.users = users;
     });
+    if (this.users.length === 0) this.usersService.getAllUsers();
   }
 
   itemsBanner = [
     {
       title: 'Teachers',
-      value: 18,
+      value: this.users.length,
       icon: this.faUsers,
     },
     {

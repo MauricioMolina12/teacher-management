@@ -67,12 +67,14 @@
         flex-direction: column;
 
         span {
-          // font-weight: 400;
-          color: var(--color-gray);
+          font-weight: 500;
+          font-size: .9rem;
+          color: var(--color-font-gray-dark-shade);
         }
 
         small {
           font-weight: 400;
+          color: var(--color-border-gray-shade);
         }
       }
     }

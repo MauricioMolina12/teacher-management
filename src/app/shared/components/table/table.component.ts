@@ -26,6 +26,7 @@ export class TableComponent implements OnInit,OnChanges {
   isLoading = true;
 
   ngOnInit(): void {
+    this.paginate();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
