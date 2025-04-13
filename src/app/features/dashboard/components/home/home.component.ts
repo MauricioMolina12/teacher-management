@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Signal } from '@angular/core';
 import {
   faBookmark,
   faGrip,
@@ -12,9 +12,10 @@ import {
   faArrowTrendUp,
   faArrowTrendDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { HttpService } from '../../../../shared/services/http.service';
-import { Observable } from 'rxjs';
 import { UsersService } from '../../../../shared/services/users.service';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ import { UsersService } from '../../../../shared/services/users.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   // Icons
   faHome = faHomeLgAlt;
   faBook = faBookmark;
@@ -38,29 +39,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   percentaje: number = 12;
   usersNumber: number = 0;
-  users: any[] = [];
+  user: any = null;
 
-  constructor(public usersService: UsersService) {}
+  constructor(
+    public userService: UsersService,
+    public authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
-    this.getAllUsers();    
-  }
-  
-  ngAfterViewInit(): void {
-    this.usersNumber = this.users.length
+  async ngOnInit() {
+    this.user = JSON.parse(this.authService.getUser());
+    this.usersNumber = this.userService.users$().length
   }
 
-  getAllUsers() {
-    this.usersService.users$.subscribe((users) => {
-      this.users = users;
-    });
-    if (this.users.length === 0) this.usersService.getAllUsers();
+
+  handleDateClick(arg: any) {
+    alert('Fecha seleccionada: ' + arg.dateStr);
   }
+
+  // getUser() {
+  //   this.authService.getUser().subscribe((user) => {
+  //     if (user) {
+  //       this.authService.userLogged = user;
+  //     }
+  //   });
+  // }
 
   itemsBanner = [
     {
       title: 'Teachers',
-      value: this.users.length,
+      value: this.usersNumber,
       icon: this.faUsers,
     },
     {

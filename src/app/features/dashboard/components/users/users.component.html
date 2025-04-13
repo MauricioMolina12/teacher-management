@@ -1,1 +1,18 @@
-<p>users works!</p>
+<div class="wrapper-user">
+        <app-table [title]="'Usuarios'" [list]="Users"
+            [headers]="['ID','Docente','Correo', 'Rol','Nivel de formación','Jornada','Acciones']"
+            [keys]="['id', 'name', 'email', 'role','level_training','working_day']"
+            (openModalCreateUser)="openModal('create')" (openModalConfirmDeleteUser)="openModal('delete', $event)"
+            (openModalConfirmEditUser)="openModal('edit', $event)"
+            (openDetailUser)="toDetailsUser($event)"
+            >
+        </app-table>
+        <app-user-form *ngIf="showModal" [title]="titleModalForm" [fields]="fields"
+            (onClose)="closeModal('close-create')" (onSubmitSuccess)="handleSuccess($event)" [user]="this.selectedUser"
+            [url]="'users'">
+        </app-user-form>
+        <app-modal-confirm [title]="'¿Seguro que quiere eliminar a este usuario?'" *ngIf="showModalConfirm"
+            (onClose)="closeModal('close-delete')" (onSubmitSuccess)="handleConfirmation($event)">
+        </app-modal-confirm>
+    
+</div>

@@ -1,13 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 *,
 *::after,
-*::before{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Work sans';
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Work sans";
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.loader {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #d6eaf8;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.submited {
+  background-color: var(--color-medium);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

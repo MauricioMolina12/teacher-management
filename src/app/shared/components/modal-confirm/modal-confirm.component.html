@@ -1,0 +1,16 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <header class="modal-actions">
+                <h2 class="title">{{ title }}</h2>
+                <div class="buttons">
+                    <button type="button" (click)="closeModal()">Cancelar</button>
+                    <button type="submit" [disabled]="isSubmitting" [ngClass]="{'submited' : isSubmitting}">
+                        <span *ngIf="!isSubmitting">Envíar</span>
+                        <div class="loader" *ngIf="isSubmitting"></div>
+                    </button>
+                </div>
+            </header>
+        </form>
+    </div>
+</div>

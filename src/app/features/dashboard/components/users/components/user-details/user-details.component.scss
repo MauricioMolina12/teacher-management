@@ -1,0 +1,15 @@
+.wrapper-details {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+
+  .title{
+    color: var(--color-dark-gray);
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   faBookmark,
@@ -10,6 +10,8 @@ import {
   faGear,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { NotificationsService } from '../../shared/services/notifications.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,7 @@ import {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
   // Icons
   faHome = faHomeLgAlt;
   faBook = faBookmark;
@@ -31,8 +33,25 @@ export class DashboardComponent {
   urlCurrent: any = '';
   isClose: boolean = true;
   isLogOut: boolean = true;
+  date: any;
+  intervalHour: any;
+  user: any = null;
 
-  constructor(public router: Router) {}
+  constructor(
+    public router: Router,
+    public notificationsService: NotificationsService,
+    public authService: AuthService
+  ) {}
+
+  async ngOnInit() {
+    this.user = await JSON.parse(this.authService.getUser());
+    console.log(this.items);
+    
+  }
+
+  ngOnDestroy(): void {
+    // clearInterval(this.intervalHour);
+  }
 
   closeModal() {
     this.isClose = !this.isClose;
@@ -40,61 +59,61 @@ export class DashboardComponent {
 
   handleClick(title: string) {
     switch (title) {
-      case 'Notifications':
+      case 'Notificaciones':
         this.closeModal();
         break;
-      case 'Log out':
+      case 'Cerrar sesión':
         this.isLogOut = false;
-
         setTimeout(() => {
-          this.router.navigate(['/user/login']);
+          this.authService.logout();
         }, 2800);
     }
   }
 
   items = [
     {
-      title: 'home',
+      title: 'Inicio',
       icon: 'home',
       url: 'home',
     },
     {
-      title: 'Manage Subjects',
+      title: 'Gestionar asignaturas',
       icon: 'library_books',
       url: 'subjects',
     },
     {
-      title: 'Create User',
-      icon: 'person_add',
+      title: 'Gestionar docentes',
+      icon: 'group',
       url: 'users',
+      isAdmin: this.user?.role_id == 1 ? true : false,
     },
     {
-      title: 'Create Faculty',
+      title: 'Crear facultad',
       icon: 'category',
       url: 'categories',
     },
+    // {
+    //   title: 'Gestionar docentes',
+    //   icon: 'group',
+    //   url: 'teachers',
+    // },
     {
-      title: 'Manage teachers',
-      icon: 'group',
-      url: 'teachers',
-    },
-    {
-      title: 'Help & Information',
+      title: 'Ayuda & Información',
       icon: 'info',
       url: 'help',
     },
     {
-      title: 'Notifications',
+      title: 'Notificaciones',
       icon: 'notifications',
       // url: 'help'
     },
     {
-      title: 'Settings',
+      title: 'Configuraciones',
       icon: 'tune',
       url: 'settings',
     },
     {
-      title: 'Log out',
+      title: 'Cerrar sesión',
       icon: 'logout',
     },
   ];

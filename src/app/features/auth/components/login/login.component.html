@@ -1,7 +1,7 @@
 <div class="login-wrapper">
 
     <!--Form-->
-    <form class="login-form" [formGroup]="myForm" (ngSubmit)="enviarFormulario()">
+    <form class="login-form" [formGroup]="myForm" (ngSubmit)="login()">
         <img class="login-image" src="/assets/logo.png" alt="">
         <h1 class="login-title">MULT</h1>
         <span class="login-description">Enter your credentials to access your account</span>
@@ -9,7 +9,7 @@
 
         <!--User controller-->
         <div class="user">
-            <label for="user">Usuario</label>
+            <label for="user">Email</label>
             <input type="email" formControlName="email" id="user" class="email-input"
                 placeholder="Ej: mauriciom-molinap@unilibre.edu.co">
             <fa-icon class="icon" [icon]="faEmail"></fa-icon>
@@ -29,15 +29,24 @@
         <!--Password controller-->
         <div class="password">
             <label for="password">Contraseña</label>
-            <input [type]="viewPassword ? 'text' : 'password'" id="password" class="password-input">
+            <input [type]="viewPassword ? 'text' : 'password'" id="password" class="password-input"
+                formControlName="password">
             <fa-icon (click)="viewPassword = !viewPassword" class="icon"
                 [icon]="viewPassword ? faEyeNoView : faEye"></fa-icon>
 
+
+            <small class="error-message" *ngIf="errorMessage">
+                <i class="material-icons">warning</i>
+                {{errorMessage}}
+            </small>
         </div>
 
         <!--Button submit-->
         <div class="button-submit">
-            <button type="submit" [disabled]="myForm.invalid">Iniciar sesión</button>
+            <button type="submit" [disabled]="sending" [ngClass]="{'submited': sending}">
+                <span *ngIf="!sending">Iniciar sesión</span>
+                <div class="loader" *ngIf="sending"></div>
+            </button>
         </div>
 
     </form>
@@ -48,4 +57,7 @@
         <img class="search-image" src="/assets/search-user.png" alt="">
         <img class="logo-unilibre" src="/assets/logo-2.png" alt="">
     </aside>
+
+    <app-modal-confirm *ngIf="(authService.isActiveSession$ | async) === true" (onClose)="isSessionActive = false" (onSubmitSuccess)="createTokens(user)"
+        [title]="'Tienes una sesión activa. Deseas cerrar la anterior y continuar?'"></app-modal-confirm>
 </div>

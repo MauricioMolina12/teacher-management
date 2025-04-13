@@ -1,0 +1,120 @@
+.wrapper-grid {
+  width: 90%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  min-height: 0;
+
+  .header {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 20px;
+
+    & > * {
+      cursor: pointer;
+    }
+
+    .dropdown {
+      background-color: transparent;
+      border: 1px solid var(--color-medium);
+      padding: 15px;
+      width: 25%;
+      border-radius: 5px;
+      color: var(--color-dark-gray);
+
+      option {
+        padding: 15px;
+      }
+    }
+
+    .button {
+      padding: 15px;
+      width: max-content;
+      min-width: 12%;
+      border-radius: 5px;
+      outline: none;
+      background-color: var(--color-primary);
+      border: 1px solid var(--color-medium);
+      color: var(--color-white);
+    }
+  }
+
+  .grid {
+    flex-grow: 1;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: minmax(220px, auto);
+    gap: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    .item {
+      width: 100%;
+      height: 100%;
+      border: 1px solid;
+      border-radius: 10px;
+      border: 1px solid var(--color-medium);
+      background-color: var(--color-white);
+      cursor: pointer;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4px;
+
+      &:hover {
+        box-shadow: 2px 2px 30px var(--color-medium),
+          -2px -2px 30px var(--color-medium);
+        transform: scale(1.01);
+      }
+
+      .item__title{
+        font-weight: 500;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .item__description{
+        font-weight: 300;
+        font-size: .8rem;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #cfcfcf;
+      border-radius: 30px;
+      transition: background 0.3s;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #9a9a9a;
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #888;
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f1f1f1;
+    }
+  }
+}

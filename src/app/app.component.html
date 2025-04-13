@@ -1,7 +1,12 @@
 <div class="layout-wrapper">
     <div class="layout-container">
         <div class="layout-content">
-            <router-outlet></router-outlet>
+            <div class="wrapper-router-outlet">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="screen-notMobile">
+                <span>No está disponible en versión mobile</span>
+            </div>
         </div>
     </div>
 </div>

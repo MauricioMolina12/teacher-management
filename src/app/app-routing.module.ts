@@ -10,12 +10,15 @@ import { CategoriesComponent } from './features/dashboard/components/categories/
 import { ManageTeachersComponent } from './features/dashboard/components/manage-teachers/manage-teachers.component';
 import { HelpInformationComponent } from './features/dashboard/components/help-information/help-information.component';
 import { SettingsComponent } from './features/dashboard/components/settings/settings.component';
+import { authGuard } from './shared/guards/auth.guard';
+import { UserDetailsComponent } from './features/dashboard/components/users/components/user-details/user-details.component';
+import { ErrorPathComponent } from './shared/components/error-path/error-path.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'user',
@@ -24,57 +27,72 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'login',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'login',
-        component: LoginComponent
-      }
-    ]
+        component: LoginComponent,
+      },
+    ],
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'subjects',
-        component: SubjectsComponent
+        component: SubjectsComponent,
       },
       {
         path: 'users',
-        component: UsersComponent
+        component: UsersComponent,
+      },
+      {
+        path: 'user/:id',
+        component: UserDetailsComponent,
       },
       {
         path: 'categories',
-        component: CategoriesComponent
+        component: CategoriesComponent,
       },
       {
         path: 'teachers',
-        component: ManageTeachersComponent
+        component: ManageTeachersComponent,
       },
       {
         path: 'help',
-        component: HelpInformationComponent
+        component: HelpInformationComponent,
       },
       {
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
       },
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
-    ]
-  }
+    ],
+  },
+  {
+    path: 'pageNotFound',
+    component: ErrorPathComponent,
+  },
+
+  {
+    path: '**',
+    redirectTo: 'pageNotFound',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,1 +1,9 @@
-<p>subjects works!</p>
+<div class="wrapper-subjects">
+    <app-slider-horizontal 
+        [title]="'Facultades'" 
+        [list]="facultades"
+        [buttonTitle]="'Crear facultad'"
+        (actionItem)="actionItemList($event)"
+        ></app-slider-horizontal>
+    <app-layout-grid></app-layout-grid>
+</div>

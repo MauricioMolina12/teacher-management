@@ -35,9 +35,9 @@ export class HttpService {
   }
 
   /** POST request */
-  public post(url: string, data: any, base: boolean = true): Observable<any> {
+  public post(url: string, data: any, base: boolean = true, options?: any): Observable<any> {
     url = base ? `${this.baseUrl}${url}` : url;
-    return this.http.post<any>(url, data).pipe(
+    return this.http.post<any>(url, data, options).pipe(
       retry(this.baseRetry),
       catchError(this.handleError)
     );
@@ -53,9 +53,9 @@ export class HttpService {
   }
 
   /** DELETE request */
-  public delete(url: string, base: boolean = true): Observable<any> {
+  public delete(url: string, base: boolean = true, options?:any): Observable<any> {
     url = base ? `${this.baseUrl}${url}` : url;
-    return this.http.delete<any>(url).pipe(
+    return this.http.delete<any>(url, options).pipe(
       retry(this.baseRetry),
       catchError(this.handleError)
     );

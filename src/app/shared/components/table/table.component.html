@@ -1,52 +1,62 @@
 <div class="table-container">
 
   <header>
-    <h2 class="table-title">Recent assignments</h2>
-    <div class="inputs-wrapper">
-      <input type="text" placeholder="Buscar..." [(ngModel)]="searchQuery" (input)="search()">
-      <i class="search-icon material-icons">search</i>
-      <!-- <button class="filter-button">
-        <i class="icon material-icons">filter_list</i>
-        <span>Filter</span>
-      </button> -->
+    <h2 class="table-title">{{title}}</h2>
+    <div class="table-actions">
+      <div class="inputs-wrapper">
+        <input type="text" [placeholder]="'Buscar ' + title.toLowerCase() + '...'" [(ngModel)]="searchQuery"
+          (input)="search()">
+        <i class="search-icon material-icons">search</i>
+      </div>
+      <button class="button-add-user" (click)="openModal('create')">
+        <span>Agregar {{title.toLowerCase()}}</span>
+      </button>
     </div>
   </header>
 
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Teacher</th>
-        <!-- <th>Email</th> -->
-        <th>user</th>
-        <th>level_training</th>
-        <th>working_day_id</th>
+        <th *ngFor="let head of headers">
+          {{head}}
+        </th>
       </tr>
     </thead>
     <tbody *ngIf="!isLoading">
-      <tr *ngFor="let user of filteredUsers">
-        <td>{{ user.user_id }}</td>
-        <td>{{ user.full_name }}</td>
-        <td>{{ user.user }}</td>
-        <td>{{ user.level_training || 1}}</td>
-        <td>{{ user.working_day_id || 1}}</td>
+      <tr *ngFor="let item of filtered" (click)="detailUser(item?.id, $event)">
+        <td *ngFor="let key of keys">{{ item[key] }}</td>
+        <td class="actions">
+          <div class="options-container">
+            <button (click)="openModal('delete', item.id)">
+              <i class="material-icons">delete</i>
+            </button>
+            <!-- <button (click)="openModal('edit', item.id)">
+              <i class="material-icons">edit</i>
+            </button> -->
+          </div>
+        </td>
       </tr>
+      <!-- <tr *ngFor="let i of [1, 2, 3, 4, 5]" class="skeleton-row"> -->
+      <!-- <td class="skeleton skeleton-text"></td> -->
+      <!-- </tr> -->
     </tbody>
-    <!-- <tbody>
-      <tr *ngFor="let i of [1, 2, 3, 4, 5]" class="skeleton-row">
-        <td class="skeleton skeleton-text"></td>
-      </tr>
-    </tbody> -->
   </table>
-  <div class="empty-search" *ngIf="filteredUsers.length === 0">
-    <span>No se encontraron de búsqueda</span>
+  <div class="empty-search" *ngIf="filtered.length === 0">
+    <span>No se encontraron resultados de búsqueda o no existe ningún registro</span>
   </div>
 
-  <div class="pagination" *ngIf="usersList.length > 5">
-    <button (click)="changePage(false)" [disabled]="currentPage === 1">← Anterior</button>
-    <span>Página {{ currentPage }}</span>
-    <button (click)="changePage(true)" [disabled]="currentPage >= users.length / itemsPerPage">
+  <div class="pagination" *ngIf="list.length > 5">
+    <button (click)="changePage('prev')" [disabled]="currentPage === 1">← Anterior</button>
+    <!-- <span>Página: {{currentPage}}</span> -->
+    <div class="button-pages">
+      <button *ngFor="let page of [].constructor(totalPages); let i = index" [ngClass]="{'active' : i+1 == currentPage}"
+        (click)="changePage('index', i+1)">
+        {{i+1}}
+      </button>
+    </div>
+    <button (click)="changePage('next')" [disabled]="currentPage >= list.length / itemsPerPage  ">
       Siguiente →
     </button>
   </div>
+
 </div>

@@ -25,7 +25,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { NotificationsModalComponent } from './shared/components/notifications-modal/notifications-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { FadeOutComponent } from './shared/components/fade-out/fade-out.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ProfileCardComponent } from './shared/components/profile-card/profile-card.component';
+import { ModalFormComponent } from './shared/components/modal-form/modal-form.component';
+import { ModalConfirmComponent } from './shared/components/modal-confirm/modal-confirm.component';
+import { UserFormComponent } from './features/dashboard/components/users/components/user-form/user-form.component';
+import { authInterceptor } from './shared/interceptors/auth.interceptor';
+import { SliderHorizontalComponent } from './shared/components/slider-horizontal/slider-horizontal.component';
+import { LayoutGridComponent } from './shared/components/layout-grid/layout-grid.component';
+import { UserDetailsComponent } from './features/dashboard/components/users/components/user-details/user-details.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { KanbanComponent } from './shared/components/kanban/kanban.component';
+import { ErrorPathComponent } from './shared/components/error-path/error-path.component';
 
 
 @NgModule({
@@ -44,6 +61,15 @@ import { HttpClientModule } from '@angular/common/http';
     NotificationsModalComponent,
     TableComponent,
     FadeOutComponent,
+    ProfileCardComponent,
+    ModalFormComponent,
+    ModalConfirmComponent,
+    UserFormComponent,
+    SliderHorizontalComponent,
+    LayoutGridComponent,
+    UserDetailsComponent,
+    KanbanComponent,
+    ErrorPathComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,11 +79,14 @@ import { HttpClientModule } from '@angular/common/http';
     LocalTimePipe,
     MatIconModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FullCalendarModule,
+    DragDropModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
   bootstrap: [AppComponent],
 })

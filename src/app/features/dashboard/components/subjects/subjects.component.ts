@@ -8,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class SubjectsComponent {
 
+  facultades = [
+    'Ingeniería',
+    'Derecho',
+    'Salud',
+    'Ciencias sociales',
+    'Economía',
+    'Artes',
+    'Deportes'
+  ]
+
+  actionItemList(item: any){    
+    console.log(item);        
+  }
+
 }

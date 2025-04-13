@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
   selector: 'app-notifications-modal',
@@ -7,30 +8,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './notifications-modal.component.scss',
 })
 export class NotificationsModalComponent {
-  @Input() notifications: { title: string; message: string; time: string }[] =
-    [];
+  @Input() notifications: { id: string; title: string; message: string; type: 'success' | 'error' | 'info' }[] =[];
   @Output() close = new EventEmitter<void>();
 
   isActive: boolean = false;
 
+  constructor(private notificationsService: NotificationsService){
+    this.notifications = this.notificationsService.notifications$();
+  }
+
   ngOnInit() {
-    this.notifications = [
-      {
-        title: 'ASIGNACIÓN',
-        message: 'Diego Suarez te ha asignado un plan de trabajo',
-        time: '10'
-      },
-      {
-        title: 'ASIGNACIÓN',
-        message: 'Diego Suarez te ha asignado un plan de trabajo',
-        time: '10'
-      },
-      {
-        title: 'ASIGNACIÓN',
-        message: 'Diego Suarez te ha asignado un plan de trabajo',
-        time: '10'
-      }
-    ]
     this.isActive = true;
   }
 

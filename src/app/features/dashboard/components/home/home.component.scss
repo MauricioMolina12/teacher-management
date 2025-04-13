@@ -80,6 +80,16 @@
     }
   }
 
+  .calendar-wrapper{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 26%;
+    height: 35%;
+    border: 2px solid red;
+
+  }
+
   .banner-container {
     gap: 10px;
     justify-content: start;
